@@ -26,7 +26,7 @@ public class ArrayExample {
      */
     private static void asList() {
         Integer[] arr = {5, 26, 1, 74, 59, 38};
-        ArrayList<Integer> list = new ArrayList<Integer>(Arrays.asList(arr));
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(arr));
 
         for (int i : list) {
             System.out.print(i + " ");
