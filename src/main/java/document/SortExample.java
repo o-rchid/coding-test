@@ -6,7 +6,8 @@ public class SortExample {
     public static void main(String[] args) {
         int[] arr = {33, 4, 13, 56, 67, 83, 1, 12};
         //selectionSort(arr);
-        insertionSort(arr);
+        //insertionSort(arr);
+        mergeSort(arr, 0, arr.length - 1);
 
         System.out.println(Arrays.toString(arr));
     }
@@ -45,6 +46,41 @@ public class SortExample {
             }
 
             arr[aux + 1] = tmp;
+        }
+    }
+
+    public static void mergeSort(int[] arr, int left, int right) {
+        if (left < right) {
+            int mid = (left + right) / 2;
+            mergeSort(arr, left, mid);
+            mergeSort(arr, mid + 1, right);
+            merge(arr, left, mid, right);
+        }
+    }
+
+    private static void merge(int[] arr, int left, int mid, int right) {
+        int i = left, j = mid + 1, k = left;
+        int[] tmp = new int[arr.length];
+
+        while (i <= mid && j <= right) {
+            if (arr[i] <= arr[j]) {
+                tmp[k++] = arr[i++];
+            }
+            else {
+                tmp[k++] = arr[j++];
+            }
+        }
+
+        while (i <= mid) {
+            tmp[k++] = arr[i++];
+        }
+
+        while (j <= right) {
+            tmp[k++] = arr[j++];
+        }
+
+        for (int idx = left; idx <= right; idx++) {
+            arr[idx] = tmp[idx];
         }
     }
 }
