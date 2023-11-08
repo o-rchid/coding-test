@@ -7,7 +7,8 @@ public class SortExample {
         int[] arr = {33, 4, 13, 56, 67, 83, 1, 12};
         //selectionSort(arr);
         //insertionSort(arr);
-        mergeSort(arr, 0, arr.length - 1);
+        //mergeSort(arr, 0, arr.length - 1);
+        quickSort(arr, 0, arr.length - 1);
 
         System.out.println(Arrays.toString(arr));
     }
@@ -82,5 +83,36 @@ public class SortExample {
         for (int idx = left; idx <= right; idx++) {
             arr[idx] = tmp[idx];
         }
+    }
+
+    public static void quickSort(int[] arr, int p, int r) {
+        if (p < r) {
+            int q = partition(arr, p, r);
+            quickSort(arr, p, q - 1);
+            quickSort(arr, q + 1, r);
+        }
+    }
+
+    public static int partition(int[] arr, int p, int r) {
+        int i = p, j = r;
+        int pivot = arr[p];
+
+        while (i < j) {
+            while (pivot < arr[j]) {
+                j--;
+            }
+
+            while (i < j && pivot >= arr[i]) {
+                i++;
+            }
+
+            int tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp;
+        }
+        arr[p] = arr[i];
+        arr[i] = pivot;
+
+        return i;
     }
 }
