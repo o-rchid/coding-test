@@ -1,13 +1,3 @@
-/*섬으로 향하라!
-
-        '   + -- + - + -   '
-        '   + --- + - +   '
-        '   + -- + - + -   '
-        '   + - + - + - +   '
-
-        해(1)와 달(0),
-        Code의 세상 안으로!(En-Coding)*/
-
 public class Q1 {
     public static void main(String[] args) {
         String[] text = {
