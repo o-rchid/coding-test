@@ -2,51 +2,51 @@ import java.util.Calendar;
 
 public class Q3 {
     public static void main(String[] args) {
-        int 대기인원 = 1400605;
-        solution(대기인원);
+        int waitingPeople = 1400605;
+        solution(waitingPeople);
     }
 
-    private static void solution(int 대기인원) {
-        int 일년일수 = 0;
+    private static void solution(int waitingPeople) {
+        int daysOfYear = 0;
 
         for (int i = 10; i > 0; i--) {
-            일년일수 += (int) Math.pow(2, i);
+            daysOfYear += (int) Math.pow(2, i);
         }
 
-        int 대기일 =  대기인원 / 1200;
-        int 연도 = 대기일 / 일년일수;
-        int 남은일수 = 대기일 % 일년일수;
-        int 월 = 0;
+        int waitingPeriod =  waitingPeople / 1200;
+        int year = waitingPeriod / daysOfYear;
+        int remainingDays = waitingPeriod % daysOfYear;
+        int month = 0;
 
         for (int i = 10; i > 0; i--) {
-            월++;
-            if (남은일수 < (int)Math.pow(2, i))
+            month++;
+            if (remainingDays < (int)Math.pow(2, i))
                 break;
-            남은일수 -= (int)Math.pow(2, i);
+            remainingDays -= (int)Math.pow(2, i);
         }
 
-        int 일 = 남은일수;
-        int 최종남은인원 = 대기인원 % 1200;
-        int 시 = 최종남은인원 / 100 + 9;
-        int[] 출발분 = {25, 40, 55, 70, 85, 100};
-        int 몇분에탈지계산 = 최종남은인원 % 100 + 1;
-        int 당일출발_분 = 0;
+        int day = remainingDays;
+        int finalRemainPeople = waitingPeople % 1200;
+        int hour = finalRemainPeople / 100 + 9;
+        int[] departureMinute = {25, 40, 55, 70, 85, 100};
+        int boardingMinute = finalRemainPeople % 100 + 1;
+        int sameDayDepartureMinute = 0;
 
-        for (int i = 0; i < 출발분.length; i++) {
-            if (출발분[i] > 몇분에탈지계산) {
-                당일출발_분 = i * 10;
+        for (int i = 0; i < departureMinute.length; i++) {
+            if (departureMinute[i] > boardingMinute) {
+                sameDayDepartureMinute = i * 10;
                 break;
             }
         }
 
-        Calendar 오늘시간 = Calendar.getInstance();
-        int 분 = 오늘시간.get(Calendar.MINUTE) + 당일출발_분;
+        Calendar today = Calendar.getInstance();
+        int minute = today.get(Calendar.MINUTE) + sameDayDepartureMinute;
 
-        if (분 > 60) {
-            분 = 분 - 60;
-            시++;
+        if (minute > 60) {
+            minute = minute - 60;
+            hour++;
         }
 
-        System.out.println((연도 + 2020) + "년 " + 월 + "월 " + 일 + "일 " + 시 + "시 " + 분 + "분");
+        System.out.println((year + 2020) + "년 " + month + "월 " + day + "일 " + hour + "시 " + minute + "분");
     }
 }
