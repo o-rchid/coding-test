@@ -1,15 +1,14 @@
 package datastructure;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class B10828_스택 {
 
-    static List<Integer> stack = new ArrayList<>();
+    static Stack<Integer> stack = new Stack<>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -20,39 +19,34 @@ public class B10828_스택 {
         }
     }
 
-    private static void solution(String command) {
+    private static void solution(String command) throws IOException {
         StringTokenizer st = new StringTokenizer(command);
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         switch (st.nextToken()) {
             case "push" :
                 int pushNum = Integer.parseInt(st.nextToken());
-                stack.add(pushNum);
+                stack.push(pushNum);
                 break;
             case "pop" :
                 if(!stack.isEmpty()){
-                    Integer popNum = stack.remove(stack.size() - 1);
-                    System.out.println(popNum);
+                    bw.write(stack.pop() + "\n");
                 }else {
-                    System.out.println(-1);
+                    bw.write(-1 + "\n");
                 }
                 break;
             case "size" :
-                System.out.println(stack.size());
+                bw.write(stack.size() + "\n");
                 break;
             case "empty" :
-                if(stack.isEmpty())
-                    System.out.println(1);
-                else
-                    System.out.println(0);
+                bw.write((stack.isEmpty() ? 1 : 0) + "\n");
                 break;
             case "top" :
-                if(!stack.isEmpty()){
-                    Integer popNum = stack.get(stack.size() - 1);
-                    System.out.println(popNum);
-                }else {
-                    System.out.println(-1);
-                }
+                bw.write((stack.isEmpty() ? -1 : stack.peek()) + "\n");
                 break;
         }
+
+        bw.flush();
+        bw.close();
     }
 }
